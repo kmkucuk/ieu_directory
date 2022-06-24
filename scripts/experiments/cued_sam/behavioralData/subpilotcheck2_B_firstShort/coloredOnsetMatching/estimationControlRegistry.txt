@@ -1,0 +1,2 @@
+controlDate	 stimCorrectCount	 responseCorrectCount	 matchedCorrectCount	 correctEstimationPercentage	 stimWrongCount	 stimOmissionCount	 stimFailedRelease	 trialCount	
+13-Sep-2021 14:01:00	  11	 11	 11	   1.00	  0	  2	  	 13	 

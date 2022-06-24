@@ -1,0 +1,3 @@
+Var1
+training_exogenous_redBlue_feedback_colorPosition_stroboscopicSlow_allStimuliEqual_normal
+Block Duration: 505.114

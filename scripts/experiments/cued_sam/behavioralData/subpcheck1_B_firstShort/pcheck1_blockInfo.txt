@@ -1,0 +1,5 @@
+Var1,Var2,Var3,Var4,Var5,Var6
+training_,endogenous_,redBlue_,feedback_,colorOrder_,simpleRT
+training_,exogenous_,redBlue_,feedback_,colorOrder_,stroboscopic
+test_,endogenous_,redBlue_,noFeedback_,colorOrder_,stroboscopic
+test_,exogenous_,redBlue_,noFeedback_,colorOrder_,stroboscopic

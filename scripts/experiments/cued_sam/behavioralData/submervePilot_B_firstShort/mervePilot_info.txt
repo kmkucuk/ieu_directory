@@ -1,0 +1,2 @@
+participantInfo1,participantInfo2,participantInfo3,participantInfo4
+mervePilot,28,female,B_firstShort

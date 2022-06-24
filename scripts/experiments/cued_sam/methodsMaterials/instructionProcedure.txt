@@ -1,0 +1,36 @@
+1) Prepare EEG recording
+
+- BASELINE BLOCK - 
+
+ experimenter instructions before running the script
+ PC instructions
+ ==baseline task==
+ 'Baseline' finished notice
+
+
+
+- TEST BLOCKS  - 
+• Same procedure for both blocks.
+• Instructions themselves differ.
+
+1) Exo training
+ Close screen + experimenter instructions
+ Open screen + PC instructions 
+ == training exo == 
+ 'Training' finished notice 
+
+2) Exo test
+ PC instructions, reminding responses
+ == test exo == 
+ 'Test' finished notice 
+
+3) Endo training
+ Close screen + experimenter instructions
+ Open screen + PC instructions 
+ == training endo == 
+ 'Training' finished notice 
+
+4) Endo test
+ PC instructions, reminding responses
+ == test endo == 
+ 'Test' finished notice

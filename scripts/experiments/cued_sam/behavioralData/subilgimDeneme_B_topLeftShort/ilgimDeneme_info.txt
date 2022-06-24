@@ -1,0 +1,2 @@
+participantInfo1,participantInfo2,participantInfo3,participantInfo4
+ilgimDeneme,30,Female,B_topLeftShort

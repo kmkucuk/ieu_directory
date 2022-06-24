@@ -1,0 +1,3 @@
+Var1
+training_exogenous_white_feedback_positionOnly_simpleRT_allStimuliEqual_normal
+Block Duration: 190.9345

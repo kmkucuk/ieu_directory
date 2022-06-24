@@ -1,0 +1,69 @@
+EXPERIMENT AND TRIAL MARKERS
+
+EXPERIMENT
+
+experiment start/stop: S1/S2
+experiment pause/continue: S3/S4
+
+COLOR-POSITION PAIR SHIFT MARKER
+
+shift stop/start: S30/S31
+
+
+TRIALS
+
+white test endogenous trial start/stop: S50/S51
+color test endogenous trial start/stop: S52/S53
+
+white test exogenous trial start/stop: S55/S56
+color test exogenous trial start/stop: S57/S58
+
+FCRT endo dots start/stop: S60/S61
+FCRT exo  dots start/stop: S62/S63
+
+RESPONSE MARKERS
+
+R1 (response 1) = red/horizontal reversal
+R1 (response 3) = blue/vertical reversal
+
+
+REVERSAL MARKERS
+
+Direction Task (report horizontal/vertical change)
+to vertical reversal: S40
+to horizontal reversal: S41
+
+Color Order Task (report color order)
+red first/second: 45/46 
+blue first/second: 47/48
+
+
+ESTIMATED ONSET MARKERS (Endogenous and Exogenous)
+
+red first/second: 55/56 
+blue first/second: 57/58
+
+
+CORRECT RESPONSE (FCRT and exogenous)
+
+S9 (placed when press is released and response is correct)
+
+
+STIMULUS MARKERS 
+
+Colored Double Dots
+red first   :  	S21
+red second  : 	S23
+blue first  : 	S25
+blue second : 	S27
+
+White Double Dots 
+first   :  	S11
+second  : 	S13
+third   : 	S15
+fourth  : 	S17
+
+
+
+
+

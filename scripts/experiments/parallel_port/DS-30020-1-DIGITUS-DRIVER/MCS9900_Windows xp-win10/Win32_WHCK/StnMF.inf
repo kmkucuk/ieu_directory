@@ -1,0 +1,371 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;
+;;  (c) Copyright ASIX Electronics Corporation
+;;  This inf file configures PCIe multi I/O (COM ) ports
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[Version]
+Signature  = "$Windows NT$"
+Provider  = %ProviderName%
+Class = MultiFunction
+ClassGUID = {4d36e971-e325-11ce-bfc1-08002be10318}
+CatalogFile=pcieports.cat 
+DriverVer=06/25/2014, 3.0.0.0
+
+[Manufacturer]
+%ProviderName% = Multi_IOCards, NTamd64
+
+[Multi_IOCards]
+%StnMultiFunction%= STN_CASCADE_2S.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3002A000&REV_00
+%StnMultiFunction%= STN_CASCADE_2S.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3002A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_2S.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3002A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3011A000&REV_00
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3011A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3011A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_2P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3020A000&REV_00
+%StnMultiFunction%= STN_CASCADE_2P.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3020A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_2P.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3020A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3012A000&REV_00
+%StnMultiFunction%= STN_CASCADE_1P1S.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3012A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_1P1S.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3012A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3000A000&REV_00
+%StnMultiFunction%= STN_CASCADE_0S1S.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3000A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_0S1S.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3000A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_5000A000&REV_00
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_9710&DEV_9900&SUBSYS_5000A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_9710&DEV_9950&SUBSYS_5000A000&REV_00 
+
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_125B&DEV_9100&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9900&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9904&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9912&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9922&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9950&SUBSYS_1000A000&REV_00
+
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_125B&DEV_9100&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9900&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9912&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9922&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9950&SUBSYS_2000A000&REV_00
+
+
+[Multi_IOCards.NTamd64]
+%StnMultiFunction%= STN_CASCADE_2S.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3002A000&REV_00
+%StnMultiFunction%= STN_CASCADE_2S.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3002A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_2S.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3002A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3011A000&REV_00
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3011A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_1S1P.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3011A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_2P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3020A000&REV_00
+%StnMultiFunction%= STN_CASCADE_2P.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3020A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_2P.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3020A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_1P1S.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3012A000&REV_00
+%StnMultiFunction%= STN_CASCADE_1P1S.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3012A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_1P1S.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3012A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_0S1S.MF, PCI\VEN_125B&DEV_9100&SUBSYS_3000A000&REV_00
+%StnMultiFunction%= STN_CASCADE_0S1S.MF, PCI\VEN_9710&DEV_9900&SUBSYS_3000A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_0S1S.MF, PCI\VEN_9710&DEV_9950&SUBSYS_3000A000&REV_00 
+
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_125B&DEV_9100&SUBSYS_5000A000&REV_00
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_9710&DEV_9900&SUBSYS_5000A000&REV_00 
+%StnMultiFunction%= STN_CASCADE_0S1P.MF, PCI\VEN_9710&DEV_9950&SUBSYS_5000A000&REV_00 
+
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_125B&DEV_9100&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9900&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9904&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9912&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9922&SUBSYS_1000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_S.MF,PCI\VEN_9710&DEV_9950&SUBSYS_1000A000&REV_00
+
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_125B&DEV_9100&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9900&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9912&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9922&SUBSYS_2000A000&REV_00
+%StnMultiFunction%= STN_SINGLE_P.MF,PCI\VEN_9710&DEV_9950&SUBSYS_2000A000&REV_00
+
+
+
+;;;;;;;;;;;;;;; X86 32-Bit OS ;;;;;;;;;;;;;;;
+
+
+[STN_CASCADE_2S.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_2S.MF.NT.HW]
+AddReg=STN_2S.RegHW
+
+[STN_CASCADE_2S.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_1S1P.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_1S1P.MF.NT.HW]
+AddReg=STN_1S1P.RegHW
+
+[STN_CASCADE_1S1P.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+
+[STN_CASCADE_1P1S.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_1P1S.MF.NT.HW]
+AddReg=STN_1P1S.RegHW
+
+[STN_CASCADE_1P1S.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_2P.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_2P.MF.NT.HW]
+AddReg=STN_2P.RegHW
+
+[STN_CASCADE_2P.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_0S1S.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_0S1S.MF.NT.HW]
+AddReg=STN_0S1S.RegHW
+
+[STN_CASCADE_0S1S.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_0S1P.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_0S1P.MF.NT.HW]
+AddReg=STN_0S1P.RegHW
+
+[STN_CASCADE_0S1P.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_SINGLE_S.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_SINGLE_S.MF.NT.HW]
+AddReg=STN_SER.RegHW
+
+[STN_SINGLE_S.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_SINGLE_P.MF.NT]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_SINGLE_P.MF.NT.HW]
+AddReg=STN_PAR.RegHW
+
+[STN_SINGLE_P.MF.NT.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+;;;;;;;;;;;;;;; Amd64 64-Bit OS ;;;;;;;;;;;;;;;
+
+
+
+[STN_CASCADE_2S.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_2S.MF.NTamd64.HW]
+AddReg=STN_2S.RegHW
+
+[STN_CASCADE_2S.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_1S1P.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_1S1P.MF.NTamd64.HW]
+AddReg=STN_1S1P.RegHW
+
+[STN_CASCADE_1S1P.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_1P1S.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_1P1S.MF.NTamd64.HW]
+AddReg=STN_1P1S.RegHW
+
+[STN_CASCADE_1P1S.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+
+[STN_CASCADE_2P.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_2P.MF.NTamd64.HW]
+AddReg=STN_2P.RegHW
+
+[STN_CASCADE_2P.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+
+[STN_CASCADE_0S1S.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_0S1S.MF.NTamd64.HW]
+AddReg=STN_0S1S.RegHW
+
+[STN_CASCADE_0S1S.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_CASCADE_0S1P.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_CASCADE_0S1P.MF.NTamd64.HW]
+AddReg=STN_0S1P.RegHW
+
+[STN_CASCADE_0S1P.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_SINGLE_S.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_SINGLE_S.MF.NTamd64.HW]
+AddReg=STN_SER.RegHW
+
+[STN_SINGLE_S.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+[STN_SINGLE_P.MF.NTamd64]
+Include=mf.inf
+Needs=MFINSTALL.mf
+
+[STN_SINGLE_P.MF.NTamd64.HW]
+AddReg=STN_PAR.RegHW
+
+[STN_SINGLE_P.MF.NTamd64.Services]
+Include=mf.inf
+Needs=MFINSTALL.mf.services
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+[STN_2S.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_COM
+HKR,Child0000,ResourceMap,1,04,06,08,0A
+HKR,Child0001,HardwareID,,MCS9950MF\STN_CASCADE_COM
+HKR,Child0001,ResourceMap,1,00,02,0A
+
+
+[STN_1S1P.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0000,ResourceMap,1,04,06,08,0A
+HKR,Child0001,HardwareID,,MCS9950MF\STN_CASCADE_COM
+HKR,Child0001,ResourceMap,1,00,02,0A
+
+[STN_0S1P.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0000,ResourceMap,1,04,06,08,0A
+
+[STN_1S0P.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0000,ResourceMap,1,04,06,08,0A
+
+
+[STN_1P1S.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_COM
+HKR,Child0000,ResourceMap,1,06,08,0A,0C
+HKR,Child0001,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0001,ResourceMap,1,00,02,04,0C
+
+[STN_2P.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0000,ResourceMap,1,06,08,0A,0C
+HKR,Child0001,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0001,ResourceMap,1,00,02,04,0C
+
+[STN_0S1S.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_COM
+HKR,Child0000,ResourceMap,1,00,02,04,06
+
+[STN_0S1P.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0000,ResourceMap,1,00,02,04,06
+
+
+[STN_SER.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_COM
+HKR,Child0000,ResourceMap,1,00,02,04,06
+
+
+[STN_PAR.RegHW]
+HKR,Child0000,HardwareID,,MCS9950MF\STN_CASCADE_LPT
+HKR,Child0000,ResourceMap,1,00,02,04,06
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[Strings]
+ProviderName="ASIX Electronics Corporation"
+MFClassName ="Multifunction"
+DiskName="Stn PCIe Multi-IO Drivers Disk"
+StnMultiFunction="PCIe to Multifunction Peripheral Controller"
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;   END OF FILE
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+

@@ -1,0 +1,3 @@
+Var1
+training_exogenous_redfeedback_colorPosition_simpleRT_allStimuliEqual_normal
+Block Duration: 217.2508

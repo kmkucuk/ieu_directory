@@ -1,0 +1,3 @@
+Var1
+training_exogenous_bluefeedback_colorPosition_simpleRT_allStimuliEqual_normal
+Block Duration: 179.5022

@@ -1,0 +1,3 @@
+Var1
+test_endogenous_redBlue_noFeedback_directions_stroboscopic_allStimuliEqual_normal
+Block Duration: 78.07

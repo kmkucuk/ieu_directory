@@ -1,0 +1,76 @@
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;;  (c) Copyright ASIX Electronics Corporation
+;;  This inf file configures system device
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[Version]
+CatalogFile=pcieports.cat 
+signature="$Chicago$"
+Class=System
+ClassGuid={4D36E97D-E325-11CE-BFC1-08002BE10318}
+Provider=%ProviderName%
+DriverVer=06/25/2014, 3.0.0.0
+
+[Manufacturer]
+%ProviderName%=Stn_Null_Function, NTamd64
+
+;
+; Manufacturer Name Section
+;
+[Stn_Null_Function]
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_125B&DEV_9100&SUBSYS_DEADDEAD&REV_00
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_9710&DEV_9900&SUBSYS_DEADDEAD&REV_00
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_9710&DEV_9950&SUBSYS_DEADDEAD&REV_00
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_9710&DEV_9905&SUBSYS_1000A000&REV_00
+
+[Stn_Null_Function.NTamd64]
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_125B&DEV_9100&SUBSYS_DEADDEAD&REV_00
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_9710&DEV_9900&SUBSYS_DEADDEAD&REV_00
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_9710&DEV_9950&SUBSYS_DEADDEAD&REV_00
+%StnNullFunctionName%=STN_SYSTEM_DEVICE,PCI\VEN_9710&DEV_9905&SUBSYS_1000A000&REV_00
+
+
+;----------------------------------------
+; BRIDGE Port Install
+;----------------------------------------
+
+;;;;  X86 ;;;; 
+
+[STN_SYSTEM_DEVICE.NT]
+AddReg=Nothing.AddReg
+
+[STN_SYSTEM_DEVICE.NT.Services]
+AddService = , %SPSVCINST_ASSOCSERVICE%   ; null service install
+
+
+
+;;;;  AMD64 ;;;;
+ 
+[STN_SYSTEM_DEVICE.NTamd64]
+AddReg=Nothing.AddReg
+
+[STN_SYSTEM_DEVICE.NTamd64.Services]
+AddService = , %SPSVCINST_ASSOCSERVICE%   ; null service install
+
+
+
+[Nothing.AddReg]
+;No entries required to add
+
+
+
+; User readable strings
+;----------------------------------------------------------
+
+[Strings]
+ProviderName="ASIX Electronics Corporation"
+SPSVCINST_ASSOCSERVICE = 0x00000002
+StnNullFunctionName="PCIe to IOBridge"
+
+;-----------------------
+; END OF FILE
+;-----------------------
+
