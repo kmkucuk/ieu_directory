@@ -1,213 +1,158 @@
-% GratingDemo
-%
-% Displays a stationary grating.  See also DriftDemo, DriftDemo2, DriftDemo3 and DriftWaitDemo.
-% ---------- Parameter Setup ----------
-% Initializes the program's parameters.
 
-% Prevents MATLAB from reprinting the source code when the program runs.
 echo off
 
+clear;
+
 sca;
-clear all;
 
-% For an explanation of the try-catch block, see the section "Error Handling"
-% at the end of this document.
-try
-  % ---------- Window Setup ----------
-  % Opens a window.
+% Setup defaults and unit color range:
+PsychDefaultSetup(2);
 
-  % Screen is able to do a lot of configuration and performance checks on
-  % open, and will print out a fair amount of detailed information when
-  % it does.  These commands supress that checking behavior and just let
-  % the demo go straight into action.  See ScreenTest for an example of
-  % how to do detailed checking.
-  Screen('Preference', 'SkipSyncTests', 1);
-  oldVisualDebugLevel = Screen('Preference', 'VisualDebugLevel', 3);
-  oldSupressAllWarnings = Screen('Preference', 'SuppressAllWarnings', 1);
+% Disable synctests for this quick demo:
+oldSyncLevel = Screen('Preference', 'SkipSyncTests', 2);
 
-  % Find out how many screens and use largest screen number.
-  whichScreen = max(Screen('Screens'));
+% Select screen with maximum id for output window:
+screenid = max(Screen('Screens'));
 
-  % Opens a graphics window on the main monitor (screen 0).  If you have
-  % multiple monitors connected to your computer, then you can specify
-  % a different monitor by supplying a different number in the second
-  % argument to OpenWindow, e.g. Screen('OpenWindow', 2).
-  window = Screen('OpenWindow', whichScreen);
 
-  % Hides the mouse cursor
-%   HideCursor;
-  %
-    pc_to_head_cm = 140;
-    
-  % parameters to play with
-    tiltInDegrees = 0;
-    % Some notes:
-    % 1) To obtain identical size of circle grating stim across different cycle sizes:
-    %       • Multiply the standard deviation by the inverse of the ratio
-    %       you increase the grating pixels (x2 size means, std*1/2)
-    %               e.g. first grating (small): [pixels = 200, std = 1] 
-    %                    second gration (large): [pixels = 400, std = .5];
-    % 2) You cannot enter "widthOfGrid" values larger than the minimum pixels of your screen, otherwise it will not show
-    
-    pixelsPerPeriod = 200; % How many pixels will each period/cycle occupy?
-    periodsCoveredByOneStandardDeviation = .75; %(1.5)^2; % the number of periods/cycles covered by one standard deviation of the radius of
-                                                % the gaussian mask.
+baseColor = [.5 .5 .5 1];
+[window, winRect] = PsychImaging('OpenWindow', screenid, baseColor);
+[screenXpixels, screenYpixels] = Screen('WindowSize', win);
+% Query frame duration: We use it later on to time 'Flips' properly for an animation with constant framerate:
+ifi = Screen('GetFlipInterval', win);
 
-    widthOfGrid = 767;
-    
-  % secondary parameters from the inital ones 
-    tiltInRadians = tiltInDegrees * pi / 180; % The tilt of the grating in radians.
-    
-    
-    spatialFrequency = 1 / pixelsPerPeriod; % How many periods/cycles are there in a pixel?
-    radiansPerPixel = spatialFrequency * (2 * pi); % = (periods per pixel) * (2 pi radians per period)
-    
-    
-    gaussianSpaceConstant = periodsCoveredByOneStandardDeviation  * pixelsPerPeriod;
 
-    % *** If the grating is clipped on the sides, increase widthOfGrid.
-    halfWidthOfGrid = widthOfGrid / 2;
-    widthArray = (-halfWidthOfGrid) : halfWidthOfGrid;  % widthArray is used in creating the meshgrid.  
+% Physical Distance/Length parameters
 
-    % ---------- Color Setup ----------
-    % Gets color values.
+monitor_distance = 140; % participants are 140 cm away from monitor
+horizontal_moni_length = 44.3; % horizontal length of monitor is 44.3 cm
+pixPerCm = screenXpixels / horizontal_moni_length;
+degreePerCm =2*atand((1/2)/monitor_distance);  % how much degrees in 1 cm
+unitDegreePerCm = 1/degreePerCm;
 
-    % Retrieves color codes for black and white and gray.
-    black = BlackIndex(window);  % Retrieves the CLUT color code for black.
-    white = WhiteIndex(window);  % Retrieves the CLUT color code for white.
-    backgroundColor = (black + white) / 2;  % Computes the CLUT color code for gray.
-    if round(backgroundColor)==white
-        backgroundColor=black;
-    end
 
-    % Taking the absolute value of the difference between white and gray will
-    % help keep the grating consistent regardless of whether the CLUT color
-    % code for white is less or greater than the CLUT color code for black.
-    absoluteDifferenceBetweenWhiteAndGray = abs(white - backgroundColor);
+stimSizeInDegree = 8; % 8 cm corresponds to 4° visual angle at 140 cm viewing distance
+stimSizeInCm = stimSizeInDegree*unitDegreePerCm; % stim will be 4 degree in size
+stimSizeInPix = stimSizeInCm*pixPerCm;
 
-    % ---------- Image Setup ----------
-    % Stores the image in a two dimensional matrix.
+pc_to_head_cm = 140;
 
-    % Creates a two-dimensional square grid.  For each element i = i(x0, y0) of
-    % the grid, x = x(x0, y0) corresponds to the x-coordinate of element "i"
-    % and y = y(x0, y0) corresponds to the y-coordinate of element "i"
-    [x y] = meshgrid(widthArray, widthArray);
+% parameters to play with
+tiltInDegrees = 0;
 
-    % Replaced original method of changing the orientation of the grating
-    % (gradient = y - tan(tiltInRadians) .* x) with sine and cosine (adapted from DriftDemo). 
-    % Use of tangent was breakable because it is undefined for theta near pi/2 and the period
-    % of the grating changed with change in theta.  
+% Some notes:
+% 1) To obtain identical size of circle grating stim across different cycle sizes:
+%       • Multiply the standard deviation by the inverse of the ratio
+%       you increase the grating pixels (x2 size means, std*1/2)
+%               e.g. first grating (small): [pixels = 200, std = 1] 
+%                    second gration (large): [pixels = 400, std = .5];
+% 2) You cannot enter "widthOfGrid" values larger than the minimum pixels of your screen, otherwise it will not show
 
-    a=cos(tiltInRadians)*radiansPerPixel;
-    b=sin(tiltInRadians)*radiansPerPixel;
+pixelsPerPeriod = 200; % How many pixels will each period/cycle occupy?
+periodsCoveredByOneStandardDeviation = .75; %(1.5)^2; % the number of periods/cycles covered by one standard deviation of the radius of
+                                            % the gaussian mask.
 
-    % Converts meshgrid into a sinusoidal grating, where elements
-    % along a line with angle theta have the same value and where the
-    % period of the sinusoid is equal to "pixelsPerPeriod" pixels.
-    % Note that each entry of gratingMatrix varies between minus one and
-    % one; -1 <= gratingMatrix(x0, y0)  <= 1
-    gratingMatrix = sin(a*x+b*y);
+widthOfGrid = 767;
 
-    % Creates a circular Gaussian mask centered at the origin, where the number
-    % of pixels covered by one standard deviation of the radius is
-    % approximately equal to "gaussianSpaceConstant."
-    % For more information on circular and elliptical Gaussian distributions, please see
-    % http://mathworld.wolfram.com/GaussianFunction.html
-    % Note that since each entry of circularGaussianMaskMatrix is "e"
-    % raised to a negative exponent, each entry of
-    % circularGaussianMaskMatrix is one over "e" raised to a positive
-    % exponent, which is always between zero and one;
-    % 0 < circularGaussianMaskMatrix(x0, y0) <= 1
-    circularGaussianMaskMatrix = exp(-((x .^ 2) + (y .^ 2)) / (gaussianSpaceConstant ^ 2));
+% secondary parameters from the inital ones 
+tiltInRadians = tiltInDegrees * pi / 180; % The tilt of the grating in radians.
 
-    % Since each entry of gratingMatrix varies between minus one and one and each entry of
-    % circularGaussianMaskMatrix vary between zero and one, each entry of
-    % imageMatrix varies between minus one and one.
-    % -1 <= imageMatrix(x0, y0) <= 1
-    imageMatrix = gratingMatrix .* circularGaussianMaskMatrix;
 
-    % Since each entry of imageMatrix is a fraction between minus one and
-    % one, multiplying imageMatrix by absoluteDifferenceBetweenWhiteAndGray
-    % and adding the gray CLUT color code baseline
-    % converts each entry of imageMatrix into a shade of gray:
-    % if an entry of "m" is minus one, then the corresponding pixel is black;
-    % if an entry of "m" is zero, then the corresponding pixel is gray;
-    % if an entry of "m" is one, then the corresponding pixel is white.
-    grayscaleImageMatrix = backgroundColor + absoluteDifferenceBetweenWhiteAndGray * imageMatrix;
+spatialFrequency = 1 / pixelsPerPeriod; % How many periods/cycles are there in a pixel?
+radiansPerPixel = spatialFrequency * (2 * pi); % = (periods per pixel) * (2 pi radians per period)
 
-    % ---------- Image Display ---------- 
-    % Displays the image in the window.
 
-    % Colors the entire window gray.
-    Screen('FillRect', window, backgroundColor);
+gaussianSpaceConstant = periodsCoveredByOneStandardDeviation  * pixelsPerPeriod;
 
-    % Writes the image to the window. 
-    Screen('PutImage', window, grayscaleImageMatrix);
+% *** If the grating is clipped on the sides, increase widthOfGrid.
+halfWidthOfGrid = widthOfGrid / 2;
+widthArray = (-halfWidthOfGrid) : halfWidthOfGrid;  % widthArray is used in creating the meshgrid.  
 
-    % Writes text to the window.
-    currentTextRow = 0;
-    Screen('DrawText', window, sprintf('black = %d, white = %d', black, white), 0, currentTextRow, black);
-    currentTextRow = currentTextRow + 20;
-    Screen('DrawText', window, 'Press any key to exit.', 0, currentTextRow, black);
+% ---------- Color Setup ----------
+% Gets color values.
 
-    % Updates the screen to reflect our changes to the window.
-    Screen('Flip', window);
-    
-    Waits for the user to press a key.
-      KbWait;
-
-    ---------- Window Cleanup ---------- 
-
-    Closes all windows.
-      sca;
-
-    % Restores the mouse cursor.
-    %   ShowCursor;
-
-    %   % Restore preferences
-    %   Screen('Preference', 'VisualDebugLevel', oldVisualDebugLevel);
-    %   Screen('Preference', 'SuppressAllWarnings', oldSupressAllWarnings);
-catch
-  % ---------- Error Handling ---------- 
-  % If there is an error in our code, we will end up here.
-
-  % The try-catch block ensures that Screen will restore the display and return us
-  % to the MATLAB prompt even if there is an error in our code.  Without this try-catch
-  % block, Screen could still have control of the display when MATLAB throws an error, in
-%   % which case the user will not see the MATLAB prompt.
-%   sca;
-% 
-%   % Restores the mouse cursor.
-%   ShowCursor;
-% 
-%   % Restore preferences
-%   Screen('Preference', 'VisualDebugLevel', oldVisualDebugLevel);
-%   Screen('Preference', 'SuppressAllWarnings', oldSupressAllWarnings);
-% 
-%   % We throw the error again so the user sees the error description.
-%   psychrethrow(psychlasterror);
+% Retrieves color codes for black and white and gray.
+black = BlackIndex(window);  % Retrieves the CLUT color code for black.
+white = WhiteIndex(window);  % Retrieves the CLUT color code for white.
+backgroundColor = (black + white) / 2;  % Computes the CLUT color code for gray.
+if round(backgroundColor)==white
+    backgroundColor=black;
 end
-% *** To rotate the grating, set tiltInDegrees to a new value.
-%     tiltInDegrees = 0; % The tilt of the grating in degrees.
-%     tiltInRadians = tiltInDegrees * pi / 180; % The tilt of the grating in radians.
 
-    % *** To lengthen the period of the grating, increase pixelsPerPeriod.
-%     pixelsPerPeriod = 100; % How many pixels will each period/cycle occupy?
-%     spatialFrequency = 1 / pixelsPerPeriod; % How many periods/cycles are there in a pixel?
-%     radiansPerPixel = spatialFrequency * (2 * pi); % = (periods per pixel) * (2 pi radians per period)
+% Taking the absolute value of the difference between white and gray will
+% help keep the grating consistent regardless of whether the CLUT color
+% code for white is less or greater than the CLUT color code for black.
+absoluteDifferenceBetweenWhiteAndGray = abs(white - backgroundColor);
 
-    % *** To enlarge the gaussian mask, increase periodsCoveredByOneStandardDeviation.
-    % The parameter "periodsCoveredByOneStandardDeviation" is approximately
-    % equal to
-    % the number of periods/cycles covered by one standard deviation of the radius of
-    % the gaussian mask.
-%     periodsCoveredByOneStandardDeviation = 1.5;
-    % The parameter "gaussianSpaceConstant" is approximately equal to the
-    % number of pixels covered by one standard deviation of the radius of
-    % the gaussian mask.
-%     gaussianSpaceConstant = periodsCoveredByOneStandardDeviation  * pixelsPerPeriod;
+% ---------- Image Setup ----------
+% Stores the image in a two dimensional matrix.
 
-    % *** If the grating is clipped on the sides, increase widthOfGrid.
-%     widthOfGrid = 300;
-%     halfWidthOfGrid = widthOfGrid / 2;
-%     widthArray = (-halfWidthOfGrid) : halfWidthOfGrid;  % widthArray is used in creating the meshgrid.  
+% Creates a two-dimensional square grid.  For each element i = i(x0, y0) of
+% the grid, x = x(x0, y0) corresponds to the x-coordinate of element "i"
+% and y = y(x0, y0) corresponds to the y-coordinate of element "i"
+[x y] = meshgrid(widthArray, widthArray);
+
+% Replaced original method of changing the orientation of the grating
+% (gradient = y - tan(tiltInRadians) .* x) with sine and cosine (adapted from DriftDemo). 
+% Use of tangent was breakable because it is undefined for theta near pi/2 and the period
+% of the grating changed with change in theta.  
+
+a=cos(tiltInRadians)*radiansPerPixel;
+b=sin(tiltInRadians)*radiansPerPixel;
+
+% Converts meshgrid into a sinusoidal grating, where elements
+% along a line with angle theta have the same value and where the
+% period of the sinusoid is equal to "pixelsPerPeriod" pixels.
+% Note that each entry of gratingMatrix varies between minus one and
+% one; -1 <= gratingMatrix(x0, y0)  <= 1
+gratingMatrix = sin(a*x+b*y);
+
+% Creates a circular Gaussian mask centered at the origin, where the number
+% of pixels covered by one standard deviation of the radius is
+% approximately equal to "gaussianSpaceConstant."
+% For more information on circular and elliptical Gaussian distributions, please see
+% http://mathworld.wolfram.com/GaussianFunction.html
+% Note that since each entry of circularGaussianMaskMatrix is "e"
+% raised to a negative exponent, each entry of
+% circularGaussianMaskMatrix is one over "e" raised to a positive
+% exponent, which is always between zero and one;
+% 0 < circularGaussianMaskMatrix(x0, y0) <= 1
+circularGaussianMaskMatrix = exp(-((x .^ 2) + (y .^ 2)) / (gaussianSpaceConstant ^ 2));
+
+% Since each entry of gratingMatrix varies between minus one and one and each entry of
+% circularGaussianMaskMatrix vary between zero and one, each entry of
+% imageMatrix varies between minus one and one.
+% -1 <= imageMatrix(x0, y0) <= 1
+imageMatrix = gratingMatrix .* circularGaussianMaskMatrix;
+
+% Since each entry of imageMatrix is a fraction between minus one and
+% one, multiplying imageMatrix by absoluteDifferenceBetweenWhiteAndGray
+% and adding the gray CLUT color code baseline
+% converts each entry of imageMatrix into a shade of gray:
+% if an entry of "m" is minus one, then the corresponding pixel is black;
+% if an entry of "m" is zero, then the corresponding pixel is gray;
+% if an entry of "m" is one, then the corresponding pixel is white.
+grayscaleImageMatrix = backgroundColor + absoluteDifferenceBetweenWhiteAndGray * imageMatrix;
+
+% ---------- Image Display ---------- 
+% Displays the image in the window.
+
+% Colors the entire window gray.
+Screen('FillRect', window, backgroundColor);
+
+% Writes the image to the window. 
+Screen('PutImage', window, grayscaleImageMatrix);
+
+% Writes text to the window.
+currentTextRow = 0;
+Screen('DrawText', window, sprintf('black = %d, white = %d', black, white), 0, currentTextRow, black);
+currentTextRow = currentTextRow + 20;
+Screen('DrawText', window, 'Press any key to exit.', 0, currentTextRow, black);
+
+% Updates the screen to reflect our changes to the window.
+Screen('Flip', window);
+
+KbWait;
+
+
+sca;

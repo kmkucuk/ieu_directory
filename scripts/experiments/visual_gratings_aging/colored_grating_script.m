@@ -36,7 +36,7 @@ degreePerCm =2*atand((1/2)/monitor_distance);  % how much degrees in 1 cm
 unitDegreePerCm = 1/degreePerCm;
 
 
-stimSizeInDegree = 8;
+stimSizeInDegree = 8; % 8 cm corresponds to 4° visual angle at 140 cm viewing distance
 stimSizeInCm = stimSizeInDegree*unitDegreePerCm; % stim will be 4 degree in size
 stimSizeInPix = stimSizeInCm*pixPerCm;
 
