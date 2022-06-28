@@ -16,10 +16,10 @@ screenid = max(Screen('Screens'));
 
 
 baseColor = [.5 .5 .5 1];
-[window, winRect] = PsychImaging('OpenWindow', screenid, baseColor);
-[screenXpixels, screenYpixels] = Screen('WindowSize', win);
+[window, winRect] = PsychImaging('OpenWindow', screenid, baseColor); % ,[0 0 200 200]
+[screenXpixels, screenYpixels] = Screen('WindowSize', window);
 % Query frame duration: We use it later on to time 'Flips' properly for an animation with constant framerate:
-ifi = Screen('GetFlipInterval', win);
+ifi = Screen('GetFlipInterval', window);
 
 
 % Physical Distance/Length parameters
@@ -29,6 +29,7 @@ horizontal_moni_length = 44.3; % horizontal length of monitor is 44.3 cm
 pixPerCm = screenXpixels / horizontal_moni_length;
 degreePerCm =2*atand((1/2)/monitor_distance);  % how much degrees in 1 cm
 unitDegreePerCm = 1/degreePerCm;
+unitDegreePerPixel = pixPerCm * unitDegreePerCm;
 
 
 stimSizeInDegree = 8; % 8 cm corresponds to 4° visual angle at 140 cm viewing distance
@@ -47,22 +48,35 @@ tiltInDegrees = 0;
 %               e.g. first grating (small): [pixels = 200, std = 1] 
 %                    second gration (large): [pixels = 400, std = .5];
 % 2) You cannot enter "widthOfGrid" values larger than the minimum pixels of your screen, otherwise it will not show
+basePixelsPerPeriod = 200; 
+baseCycleStd = .75;
 
-pixelsPerPeriod = 200; % How many pixels will each period/cycle occupy?
-periodsCoveredByOneStandardDeviation = .75; %(1.5)^2; % the number of periods/cycles covered by one standard deviation of the radius of
+
+
+
+pixelsPerPeriod = 400; % How many pixels will each period/cycle occupy?
+periodsCoveredByOneStandardDeviation = 1; % the number of periods/cycles covered by one standard deviation of the radius of
                                             % the gaussian mask.
+                                            
+                                            
+gratingPixels = 400; % pixels used for each cycle
+pixelRatio = gratingPixels / basePixelsPerPeriod; 
+gratingCycleStd = 1;%^baseCycleStd * (1/pixelRatio);
 
-widthOfGrid = 767;
+
+
+widthOfGrid = stimSizeInPix;
 
 % secondary parameters from the inital ones 
 tiltInRadians = tiltInDegrees * pi / 180; % The tilt of the grating in radians.
 
-
-spatialFrequency = 1 / pixelsPerPeriod; % How many periods/cycles are there in a pixel?
+cyclePerDegree = 1;
+% pixPerCycle = 
+spatialFrequency = 1 / gratingPixels; % How many periods/cycles are there in a pixel?
 radiansPerPixel = spatialFrequency * (2 * pi); % = (periods per pixel) * (2 pi radians per period)
 
 
-gaussianSpaceConstant = periodsCoveredByOneStandardDeviation  * pixelsPerPeriod;
+gaussianSpaceConstant = gratingCycleStd  * gratingPixels;
 
 % *** If the grating is clipped on the sides, increase widthOfGrid.
 halfWidthOfGrid = widthOfGrid / 2;
@@ -76,7 +90,7 @@ black = BlackIndex(window);  % Retrieves the CLUT color code for black.
 white = WhiteIndex(window);  % Retrieves the CLUT color code for white.
 backgroundColor = (black + white) / 2;  % Computes the CLUT color code for gray.
 if round(backgroundColor)==white
-    backgroundColor=black;
+    backgroundColor=backgroundColor;
 end
 
 % Taking the absolute value of the difference between white and gray will
@@ -140,7 +154,7 @@ grayscaleImageMatrix = backgroundColor + absoluteDifferenceBetweenWhiteAndGray *
 % Colors the entire window gray.
 Screen('FillRect', window, backgroundColor);
 
-% Writes the image to the window. 
+% Writes the image to the window.  
 Screen('PutImage', window, grayscaleImageMatrix);
 
 % Writes text to the window.

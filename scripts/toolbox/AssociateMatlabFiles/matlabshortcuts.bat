@@ -24,8 +24,8 @@ REM file to another release also installed on the computer or do not want the
 REM user to supply the MATLAB release number (MATLAB command "version -release")
 REM and the MATLAB installation root directory (MATLAB command "matlabroot").
 REM Any supplied command line arguments override the values set below.
-SET matlabrelease=R2020a
-SET matlabroot="C:\Program Files\MATLAB\R2020a"
+SET matlabrelease=R2021a
+SET matlabroot="D:\MATLAB"
 REM
 REM --------------------------DO NOT EDIT BELOW---------------------------------
 

@@ -36,7 +36,7 @@ degreePerCm =2*atand((1/2)/monitor_distance);  % how much degrees in 1 cm
 unitDegreePerCm = 1/degreePerCm;
 
 
-stimSizeInDegree = 8; % 8 cm corresponds to 4° visual angle at 140 cm viewing distance
+stimSizeInDegree = 4; % 8 cm corresponds to 4° visual angle at 140 cm viewing distance
 stimSizeInCm = stimSizeInDegree*unitDegreePerCm; % stim will be 4 degree in size
 stimSizeInPix = stimSizeInCm*pixPerCm;
 
@@ -61,7 +61,7 @@ texture = CreateProceduralColorGrating(win, virtualSize, virtualSize,...
 angle = 0;
 
 % phase
-phase = 0;
+phase = 90;
 
 % spatial frequency
 cyclesPerDegree = 1;
@@ -79,6 +79,7 @@ while 1
 Screen('DrawText', window, sprintf('a-angle = %d, s-contrast = %.2f', angle, contrast), 10 , 80, 1);
 Screen('DrawText', window, sprintf('d-cycle/degree = %.2f, f-phase = %d', cyclesPerDegree,phase), 10 , 110, 1);
 Screen('DrawText', window, sprintf('mode = %s', mode), 10 , 180, 1);
+Screen('DrawText', window, sprintf('sgima = %.2f', sigma), 10 , 220, 1);
 Screen('DrawText', win, 'Standard Color Sinusoidal Grating', 10, 10, [1 1 1]);
 % Draw the shader texture with parameters
 Screen('DrawTexture', win, texture, [], [],...
@@ -108,9 +109,15 @@ KbWait();
 
     if keyCode(KbName('f'))
        mode = 'phase';
-    end    
+    end   
+    
+    if keyCode(KbName('g'))
+       mode = 'sigma';
+    end       
+    
     if keyCode(KbName('r'))
         angle = 0;
+        sigma = -1; 
         contrast = 1;
         cyclesPerDegree = 1;
         frequency = (cyclesPerDegree.*stimSizeInDegree) ./ stimSizeInPix;
@@ -125,8 +132,8 @@ KbWait();
         end
 
         if strcmp(mode,'contrast')
-           if contrast >= .125
-               contrast = contrast-.125;
+           if contrast >= .005
+               contrast = contrast-.005;
            end      
 
         end
@@ -143,8 +150,13 @@ KbWait();
                 phase = phase-15;
             end
             
-        end         
+        end     
         
+        if strcmp(mode,'sigma')
+           if sigma >= -5
+               sigma = sigma-.1;
+           end
+        end        
     elseif keyCode(KbName('UpArrow'))
         
         if strcmp(mode,'angle')
@@ -154,8 +166,8 @@ KbWait();
         end
 
         if strcmp(mode,'contrast')
-           if contrast <=.875
-               contrast = contrast+.125;
+           if contrast <=.995
+               contrast = contrast+.005;
            end
         end
 
@@ -171,10 +183,16 @@ KbWait();
                 phase = phase+15;
             end
             
+        end      
+        
+        if strcmp(mode,'sigma')
+           if sigma <= 100
+               sigma = sigma+.1;
+           end
         end         
         
     end
-WaitSecs(.1);
+WaitSecs(.025);
 end
 
 sca;
