@@ -57,6 +57,8 @@ texture = CreateProceduralColorGrating(win, virtualSize, virtualSize,...
 
 % These settings are the parameters passed in directly to DrawTexture
 
+experiment_trials = repmat();
+
 % angle
 angle = 0;
 
@@ -74,13 +76,7 @@ contrast = 1;
 sigma = -1;
 mode = 'none';
 
-while 1 
-% Draw a message
-Screen('DrawText', window, sprintf('a-angle = %d, s-contrast = %.2f', angle, contrast), 10 , 80, 1);
-Screen('DrawText', window, sprintf('d-cycle/degree = %.2f, f-phase = %d', cyclesPerDegree,phase), 10 , 110, 1);
-Screen('DrawText', window, sprintf('mode = %s', mode), 10 , 180, 1);
-Screen('DrawText', window, sprintf('sigma = %.2f', sigma), 10 , 220, 1);
-Screen('DrawText', win, 'Standard Color Sinusoidal Grating', 10, 10, [1 1 1]);
+for trialIndex = 1:length(experiment_trials)
 
 % Draw the shader texture with parameters
 Screen('DrawTexture', win, texture, [], [],...
@@ -117,7 +113,7 @@ KbWait();
     end       
     
     if keyCode(KbName('r'))
-        angle = 0;
+        angle = ;
         sigma = -1; 
         contrast = 1;
         cyclesPerDegree = 1;

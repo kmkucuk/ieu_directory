@@ -62,13 +62,13 @@ while 1
                 splots(pindx)=subplot(chanCount,plotC,pindx);
                 % for pair-wise channels (f3-f4 (left/right)...)
 %                 splots(pindx)=subplot(chanCount/2,2,pindx);  
-                    if datatype(1)== 'e' || datatype(1)== 'n'
+%                     if datatype(1)== 'e' || datatype(1)== 'n'
                         contourf(times,convStats(cond2plot(i)).convFreqs(freqIndices(1):freqIndices(2)),convStats(cond2plot(i)).(datatype)(freqIndices(1):freqIndices(2),:,channel(kk))...
-                            ,20,'linecolor','none')
-                    elseif datatype(1)== 'i'                        
+                            ,40,'linecolor','none')
+%                     elseif datatype(1)== 'i'                        
                         contourf(times,convStats(cond2plot(i)).convFreqs(freqIndices(1):freqIndices(2)),convStats(cond2plot(i)).(datatype)(freqIndices(1):freqIndices(2),:,channel(kk))...
-                            ,20,'linecolor','none')
-                    end
+                            ,40,'linecolor','none')
+%                     end
                     
                 colormap('jet');
 %                 yticks=[4 5 6 7 8];

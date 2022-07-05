@@ -76,13 +76,13 @@ plot(youngAvg(2,:),yFitOld,'r:','linewidth',2)
 plot(youngAvg(2,:),yFitYoung,'b:','linewidth',2)
 plot(youngAvg(2,:),youngAvg(1,:),'b','linewidth',2)
 
-set(gca,'ylim',[0 2],'FontName','Helvetica','FontSize',18,...
+set(gca,'ylim',[-2 2],'FontName','Helvetica','FontSize',18,...
     'TickDir','out','linewidth',5,'XColor',[0 0 0],'YColor',[0 0 0])
 set(gca,'box','off')
 xticklabels({'F','C','P','O'})
 xlabel('ROIs in Unit Distance')
 ylabel('Anteriorization Slope')
-legend({'','Older Slope','Young Slope',''},'Location','south')
+legend({'','Older Slope','Young Slope',''},'L)
 % cellst = num2cell(nan(length(antStruct)+1,length(fieldnames(antStruct))));
 % cellst(1,:) = fieldnames(antStruct).'
 % cellst(2:end,:) = squeeze([struct2cell(antStruct)]).';
