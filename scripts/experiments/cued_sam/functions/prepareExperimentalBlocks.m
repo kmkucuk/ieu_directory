@@ -37,8 +37,10 @@ experimentalBlocks      = { [2,1,1,2,5,1,1,1],... (1) FCRTT, white, position onl
     ... % exo training RED+BLUE+POSITION
     [2,1,2,2,3,3,1,1],... % (15) Exogenous, Red and Blue dots, report change+color+position,  1.5x slow
     [2,1,2,2,3,2,1,1]};   % (16) Exogenous, Red and Blue dots, report change+color+position
-
+                      
 experimentalBlocks = {[3,1,2,1,3,2,1,1]};
+
+experimentalBlocks = {[3,2,1,1,1,2,1,1]}; % endo white
 % 16 STEP TRAINING - FCRTT-ENDO-DOTS AND ENDOGENOUS TASK 
 %         % FCRTT Endo training
 % experimentalBlocks      = { [2,2,1,1,5,1,1,1],... (1) FCRTT, white, position only, LEFT-experimenter tells the button

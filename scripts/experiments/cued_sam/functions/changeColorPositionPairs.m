@@ -19,14 +19,9 @@ end
                 Screen('TextSize',window,50)
                 DrawFormattedText2(['Deney 15 saniye sonra devam edecek'],'win',window, 'sx',xCenter,'sy', yCenter,'xalign','center','yalign','center','xlayout','center','baseColor',[0 0 0]);
                 Screen('Flip',window);
-                sendParallelSignal(portAddress,30,ioObj) % send s30 when trial stopped for CP shift
-                WaitSecs(.005);
-                endParallelSignal(portAddress,ioObj);
                 WaitSecs(15);
                 Screen('Flip',window);
-                sendParallelSignal(portAddress,31,ioObj) %  send s31 when experiment continued
-                WaitSecs(.005);
-                endParallelSignal(portAddress,ioObj);                    
+             
                 WaitSecs(1);
             end
         end
@@ -45,14 +40,10 @@ end
                 presentationRects([1 2 3 7 8 9])=presentationRects([7 8 9 1 2 3]);
                 DrawFormattedText2(['Deney 15 saniye sonra devam edecek'],'win',window, 'sx',xCenter,'sy', yCenter,'xalign','center','yalign','center','xlayout','center','baseColor',[0 0 0]);
                 Screen('Flip',window);
-                sendParallelSignal(portAddress,30,ioObj) % send s30 when trial stopped for CP shift
-                WaitSecs(.005);
-                endParallelSignal(portAddress,ioObj);
+
                 WaitSecs(15);
                 Screen('Flip',window);
-                sendParallelSignal(portAddress,31,ioObj) % send s31 when experiment continued
-                WaitSecs(.005);
-                endParallelSignal(portAddress,ioObj); 
+
                 WaitSecs(1);
             end
 
