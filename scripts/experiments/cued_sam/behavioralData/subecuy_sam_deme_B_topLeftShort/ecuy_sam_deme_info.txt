@@ -1,0 +1,2 @@
+participantInfo1,participantInfo2,participantInfo3,participantInfo4
+ecuy_sam_deme,21,Female,B_topLeftShort

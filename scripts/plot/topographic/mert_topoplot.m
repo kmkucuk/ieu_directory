@@ -8,7 +8,7 @@
 %
 % maxFreqField = it is the structure field that contains maximum frequency (e.g. 'lowbeta').
 % 
-function mert_topoplot(convStats,conditions,timewins,freqs,datatype,ylims,method,groupText,pCount,maxFreqField)
+function mert_topoplot(convStats,conditions,chans,timewins,freqs,datatype,ylims,method,groupText,pCount,maxFreqField)
 
 load 10chanlocs.mat
 
