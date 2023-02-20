@@ -8,16 +8,19 @@
 %
 % maxFreqField = it is the structure field that contains maximum frequency (e.g. 'lowbeta').
 % 
-function mert_topoplot(convStats,conditions,chans,timewins,freqs,datatype,ylims,method,groupText,pCount,maxFreqField)
-
-load 10chanlocs.mat
-
+function mert_topoplot(convStats,conditions,chans,timewins,freqs,datatype,ylims,method,groupText,pCount,maxFreqField,chaninfovariable)
+if ~exist('chaninfovariable','var')
+    load 10chanlocs.mat
+end
+if ~exist('chans','var')
+    chans=1:length(convStats(1).chaninfo);
+end
 times=convStats(1).times;
 
-chans=[1 2 3 4 5 6 7 8];
+
 
 plotC=length(conditions);
-isempty(freqs)
+
 plotT=length(timewins)/2;
 actualFreqs = freqs;
 if ~isempty(freqs)
@@ -31,19 +34,25 @@ timeindx=findIndices(times,timewins);
 data=[];
 for i = 1:plotC
     if plotC > 1
-        pIndices = (((conditions(i)-1)*pCount)+1) : (conditions(i)*pCount);
+        pIndices = (((conditions(i)-1)*pCount)+1) : (conditions(i)*pCount)
     else 
         pIndices = 1;
     end
     j=i;
     timeIndx=0;
-    for k = 1:2:length(timewins)
+    for k = 1:2:length(timewins)      
     timeIndx=timeIndx+1;
     plotIndx = timeIndx+((j-1)*plotT);
         if ~isempty(freqs)
             if ~isempty(regexp(method,'mean'))
-                data=mean(convStats(conditions(i)).(datatype)(freqs,timeindx(k):timeindx(k+1),chans),2); % FOR ERSP 
-                titleText=[convStats(pIndices(1)).group ,' frequency: ' ,num2str(actualFreqs),'Hz'];
+                data=squeeze(mean(convStats(conditions(pIndices)).(datatype)(freqs,timeindx(k):timeindx(k+1),chans),2)); % FOR ERSP 
+                assignin('base','data',data);
+%                 titleText=[groupText{i},'  ' ,num2str(actualFreqs),'Hz'];
+                if timewins(1) < 0
+                    titleText=['pre-video' ,'  ' ,num2str(actualFreqs),'Hz'];
+                else
+                    titleText=['during video' ,'  ' ,num2str(actualFreqs),'Hz'];
+                end
             else
 
                 if freqs == 999
@@ -56,16 +65,16 @@ for i = 1:plotC
                     data=cat(4,convStats(pIndices).(datatype));
                     data=mean(max(data(freqs,timeindx(k):timeindx(k+1),chans,:),[],2),4); % FOR ERSP 
                 end
-                titleText=[convStats(pIndices(1)).group ,' frequency: ' ,num2str(actualFreqs),'Hz'];
+                titleText=[groupText{i},' frequency: ' ,num2str(actualFreqs),'Hz'];
             end
         else
             if ~isempty(regexp(method,'mean'))
                 data=mean(convStats(conditions(i)).(datatype)(timeindx(k):timeindx(k+1),chans),2); % FOR ERSP 
-                titleText=[convStats(pIndices(1)).group ,' frequency: ' ,num2str(actualFreqs),'Hz'];
+                titleText=[groupText{i} ,' frequency: ' ,num2str(actualFreqs),'Hz'];
             else
-                data=cat(3,convStats(pIndices).(datatype)(timeindx(k):timeindx(k+1),chans));
+                data=cat(3,convStats(i).(datatype)(timeindx(k):timeindx(k+1),chans));
                 data=mean(max(data,[],1),3);     
-                titleText=[convStats(pIndices(1)).group ,' frequency: ' ,num2str(freqs),'Hz'];
+                titleText=[groupText{i}  ,' frequency: ' ,num2str(freqs),'Hz'];
 %                 titleText=convStats(pIndices(1)).group;
             end        
 
@@ -80,14 +89,18 @@ for i = 1:plotC
 %         end
 
 %     subplot(plotT,plotC,plotIndx);    
-    topoplot(data,EEG.chanlocs,'maplimits',ylims);
+    size(data)
+    size(chaninfovariable)
+    topoplot(data,chaninfovariable,'maplimits',ylims);
+    set(gca,'ylim',ylims,'ytick',yticks,'xtick',xticks,'xlim', xlimits,...
+'tickdir','out','XColor',[0 0 0], 'YColor', [0 0 0],'FontSize',14,'box','off');  
     title(titleText)
         if i==plotC
             cb=colorbar;
             cb.Position = cb.Position  + [.1 0 0 0];
             cbtitle=get(cb,'Title');
             set(cbtitle,'String',"dB")
-            set(cb,'fontweight','bold','fontsize',12);
+            set(cb,'fontweight','bold','fontsize',8);
             cbticks=linspace(ylims(1),ylims(2),3);
             % %set colorbar ticks
             set(cb,'Ticks',cbticks);

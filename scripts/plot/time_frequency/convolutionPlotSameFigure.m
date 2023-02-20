@@ -133,9 +133,9 @@ while 1
 
 end
     cb=colorbar;
-    cbtitle=get(cb,'Title');
-    set(cbtitle,'String',"db")  %    \surd%\DeltaITC
-    set(cbtitle,'fontweight','bold','fontsize',12);
+%     cbtitle=get(cb,'Title');
+%     set(cbtitle,'String',"db")  %    \surd%\DeltaITC
+%     set(cbtitle,'fontweight','bold','fontsize',12);
     %set colorbar ticks
     set(cb,'Ticks',linspace(clim(1),clim(2),3))
     %set colorbar position

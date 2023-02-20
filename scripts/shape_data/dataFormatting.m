@@ -67,16 +67,17 @@ for i = 1:length(conditions)
     pindices = [pindices (((conditions(i)-1)*pPerCond)+1):((conditions(i)*pPerCond))];  
 end
 pIDs={EEG(pindices).subject}.'
-exclusionIndices = {EEG(pindices).usedInAnalysis}.';
+% exclusionIndices = {EEG(pindices).usedInAnalysis}.';
 groupNames = {EEG(pindices).group}.';
 % exclusionIndices = find([exclusionIndices{:}] > 0)
 % exclusionIndices = find(~cellfun(@isempty,exclusionIndices))
-% pIDs=[pIDs(1:pPerCond);pIDs(end-pPerCond+1:end)]; %%% assuming the last 15 participants are in a different group than the first 15 participants.
+groupNames = [groupNames(1:pPerCond);groupNames(end-pPerCond+1:end)]; %%% assuming the last 15 participants are in a different group than the first 15 participants.
+pIDs=[pIDs(1:pPerCond);pIDs(end-pPerCond+1:end)]; %%% assuming the last 15 participants are in a different group than the first 15 participants.
 %% SPSS STRUCTURE VARIABLE IS CREATED IN THIS SECTION WITH participant names
 
 [spssStructure(1:(pPerCond*groupCount)).subject]=pIDs{1:end};
 [spssStructure(1:(pPerCond*groupCount)).group]=groupNames{1:end};
-[spssStructure(1:(pPerCond*groupCount)).exclusion]=exclusionIndices{1:end};
+% [spssStructure(1:(pPerCond*groupCount)).exclusion]=exclusionIndices{1:end};
 
 % [latencyStructure(1:(pPerCond*groupCount)).subject]=pIDs{1:end};
 %% Extract time & frequency indices 
@@ -115,20 +116,21 @@ for pti = 1:(pPerCond*condCount)
    
     % find participant index
     
-    subName=EEG(pti+pScalar).subject(1:8); 
+    subName=EEG(pti+pScalar).subject(1:end); 
     pIndx   = regexp(pIDs,subName);
     pIndx   = find(~cellfun(@isempty,pIndx)); 
-%     [~, pIndx]=max(strncmp(pIDs,subName,6));
-%     pti+pScalar
-%     pIndx
-%     pIDs
+    [~, pIndx]=max(strncmp(pIDs,subName,5));
+    
+% %     pti+pScalar
+% %     pIndx
+% %     pIDs
     
     %create condition name 
     charIndx=ismember(EEG(pti+pScalar).condition,'o');
     [~,charIndx]=max(charIndx);
     condName=EEG(pti+pScalar).condition(1:end);
     
-    fprintf('\nProcessing participant: %s', EEG(pti+pScalar).subject(1:8));
+    fprintf('\nProcessing participant: %s', EEG(pti+pScalar).subject(1:end));
     
 %     if EEG(pti+pScalar).usedInAnalysis==0
 %         fprintf('\nParticipant excluded from analysis: %s', EEG(pti+pScalar).subject(1:5));
@@ -179,17 +181,17 @@ for pti = 1:(pPerCond*condCount)
                 %Individual Peak Frequency line, comment below if you are
                 %not using individual peaks
                 
-                if individualFreq == 1
-                    freqPoints = EEG(pti+pScalar).(individualFrequencyName);
-                
-                    if ~isempty(freqPoints)        
-                        freqs=EEG(1).convFreqs;
-                        freqIndices=extractDataIndex(freqs,freqPoints);
-                        
-                    else 
-                        freqPoints=[];
-                    end
-                end
+%                 if individualFreq == 1
+%                     freqPoints = EEG(pti+pScalar).(individualFrequencyName);
+%                 
+%                     if ~isempty(freqPoints)        
+%                         freqs=EEG(1).convFreqs;
+%                         freqIndices=extractDataIndex(freqs,freqPoints);
+%                         
+%                     else 
+%                         freqPoints=[];
+%                     end
+%                 end
                 
                 %% different data extraction methods
                 if ~isempty(regexp(method,'mean')) %#ok<*RGXP1>
@@ -283,7 +285,7 @@ for pti = 1:(pPerCond*condCount)
                             else
                                 
                             %Convolution mean
-
+                            
                             spssStructure(pIndx).(condNameRegFreq)=mean(timeMeanData(freqIndices(fi):freqIndices(fi+1),:,:),1);
 
                             %Convolution max
@@ -306,8 +308,11 @@ for pti = 1:(pPerCond*condCount)
                         end
                        
                         %Get data value
+                        fprintf('\nP indx: %s \nfreqIndices: %s \ncondNameRegFreq: %s \n',num2str(pIndx),num2str(pIndx),num2str(condNameRegFreq));
 %                         pIndx
+%                         freqIndices
 %                         size(timeMeanData)
+%                         condNameRegFreq
                         spssStructure(pIndx).(condNameRegFreq)=mean(timeMeanData(freqIndices,:,:),1);
                         %Get latency value
                         if ~isempty(regexp(method,'maximum'))
