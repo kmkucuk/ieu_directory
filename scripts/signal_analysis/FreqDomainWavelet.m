@@ -37,19 +37,33 @@ waveData.cycle = cycle;
 waveData.foldTime = predtimes;
 if graph ==1
     figure(1)
-    plot(hz,2*abs(fcmw(1:length(hz))) ,'k','linew',3);
-    set(gca,'xlim',[0 20]);
+    subplot(3,1,1)
+    plot(hz,2*abs(fcmw(1:length(hz))) ,'k','linew',2);
+    
+    if cycle == 7 && frex == 11        
+        hold on 
+        plot([11 11],get(gca,'ylim') ,'k:','linew',3);
+        plot([7.87 7.87],get(gca,'ylim') ,'r:','linew',2);
+        plot([14.12 14.12],get(gca,'ylim') ,'r:','linew',2);
+        set(gca,'xtick',[0 6, 7.87, 10,11, 12, 14.12 16]);
+    end
+    hold off 
+    set(gca,'xlim',[5 17]);
+    ylabel('Power')
+    xlabel('Frequencies (Hz)')
+    title([num2str(frex) 'Hz wavelet in frequency domain ' num2str(cycle) ' cycles' ])
 
-    figure(2)
-    subplot(2,1,1)
+    subplot(3,1,2)
 
-    plot(wavtime,gaussian ,'k','linew',3);
-
+    plot(wavtime,gaussian ,'k','linew',2);
+    xlabel('Time')
     title([ 'Gaussian with ' num2str(cycle) ' cycles' ])
 
-    subplot(2,1,2)
+    subplot(3,1,3)
 
-    plot(wavtime,cmw ,'k','linew',3);
-    text([.6 .6],[.7 .7],['Folding time: ' num2str(round(predtimes,3))],'Color','k','FontSize',12,'HorizontalAlignment','center')
+    plot(wavtime,cmw ,'k','linew',2);
+%     text([.6 .6],[.7 .7],['Folding time: ' num2str(round(predtimes,3))],'Color','k','FontSize',12,'HorizontalAlignment','center')
     title([ 'Complex Morlet Wavelet ',num2str(frex), ' Hz ' num2str(cycle) ' cycle' ])
+    xlabel('Time')
+    ylabel('Unit Energy')
 end

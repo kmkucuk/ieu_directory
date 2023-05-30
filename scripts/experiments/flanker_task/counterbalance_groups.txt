@@ -1,0 +1,7 @@
+This applies to switch versions:
+
+cb group 0 = press 1 for left arrows, press 2 for right arrows
+
+cb group 1 = press 2 for left arrows, press 1 for right arrows
+
+for switch versions: Every 1/4th of the experiment, instructions are switched

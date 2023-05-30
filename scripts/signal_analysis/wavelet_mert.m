@@ -87,5 +87,5 @@ table_full_width_at_half_maximum = [freq;range_u;range_o;bw];
 
  table_2sig_94perc = [freq;range_us2;range_os2]
  table_1_sig_68perc = [freq;range_us2;range_os2];
- clear a bw dt faxis frange freq i k0 nFreqs power powerspectrum range_o range_os range_os2 range_u range_us2 range_us df sig spacing spect t t_end taxis x sf
+%  clear a bw dt faxis frange freq i k0 nFreqs power powerspectrum range_o range_os range_os2 range_u range_us2 range_us df sig spacing spect t t_end taxis x sf
  

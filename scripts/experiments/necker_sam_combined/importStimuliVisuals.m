@@ -1,5 +1,5 @@
-function importStimuliVisuals(x) %%% x is the window that we operate in in the script of experiment (see Screen('Open', window etc.)
-cd('E:\Backups\Matlab Directory\2019-2020\MultistableExperiment\Experiment Images\Stimuli');
+function importStimuliVisuals(x,path) %%% x is the window that we operate in in the script of experiment (see Screen('Open', window etc.)
+cd(path);
 imgs=ls;
 [row,column]=size(imgs);
 

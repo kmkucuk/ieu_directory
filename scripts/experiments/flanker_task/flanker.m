@@ -94,6 +94,18 @@ Screen('Flip',window);
 WaitSecs(2);
 
 
+%% response related variables 
+% Port 
+noPressByte                     = 120; % port signal without any press
+one_pressByte                   = 248; % button - 1 port signal
+two_pressByte                   = 88;  % button - 2 port signal 
+three_pressByte                 = 248; % button - 3 port signal
+four_pressByte                  = 112; % button - 4 port signal
+response_bytes                  = [one_pressByte, two_pressByte,three_pressByte,four_pressByte];
+response_bytes_names             = {'one','two','three','four'};
+pause_key                       = KbName('p');
+escape_key                      = KbName('ESCAPE');
+
 
 %% Experimental parameters
 stimulus_duration = 0.15;

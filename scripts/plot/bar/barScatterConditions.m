@@ -113,6 +113,8 @@ color2 = [.5 .5 .5];
 
 color1 = [1 0 0];
 color2 = [0 0 1];
+color3 = [0 1 0];
+color4 = [0 .5 .5];
 colorVector = [repmat({color1},1,conditionCount) repmat({color2},1,conditionCount)] ;
 % colorVector = {[1 0 0],[0 0 1],[0 1 0],[0 0 0],	[1 0 1]};
 % colorVector = {[1 0 0],[1 .3 0],[0 0 1],[0 .5 1]};
@@ -145,7 +147,7 @@ meanData = reshape(meanData,conditionCount,groupCount);
 stdError = reshape(stdError,conditionCount,groupCount);
 
 
-b=bar(meanData,1,'FaceColor','flat','LineWidth',3); 
+b=bar(meanData,1,'FaceColor','flat','LineWidth',1.5); 
 
 hold on
 % Find the number of groups and the number of bars in each group
@@ -159,7 +161,7 @@ xaxis = [];
 for i = 1:nbars
     % Calculate center of each bar
     x = (1:ngroups) - groupwidth/2 + (2*i-1) * groupwidth / (2*nbars);
-    errorbar(x, meanData(:,i), stdError(:,i), 'k', 'linestyle', 'none','LineWidth',3);
+    errorbar(x, meanData(:,i), stdError(:,i), 'k', 'linestyle', 'none','LineWidth',1.5);
     xaxis = cat(2,xaxis,x);
 end
 
@@ -171,10 +173,11 @@ for barColorindx = 1:size(b,2)
     else
         colors = color2;
     end
-    b(barColorindx).CData(:,:) = repmat(colors,3,1);
-%     b(barColorindx).CData(2,:) = color2; %plotColors(conditionCount+1:end,:);
-%     b(barColorindx).CData(3,:) = color1; %plotColors(1:conditionCount,:);
-%     b(barColorindx).CData(4,:) = color2; %plotColors(conditionCount+1:end,:);
+%     b(barColorindx).CData(:,:) = repmat(colors,3,1);
+    b(barColorindx).CData(1,:) = color1; %plotColors(conditionCount+1:end,:);
+    b(barColorindx).CData(2,:) = color2; %plotColors(conditionCount+1:end,:);
+    b(barColorindx).CData(3,:) = color3; %plotColors(1:conditionCount,:);
+    b(barColorindx).CData(4,:) = color4; %plotColors(conditionCount+1:end,:);
 end
 set(findobj(gca,'type','line'),'linew',1) % line width of boxplot is 1 
 
@@ -190,7 +193,7 @@ for i = 1:nbars
     % Calculate center of each bar
     x = repmat(xaxis(i),1,length(data));
 %     errorbar(x, meanData(:,i), stdError(:,i), 'k', 'linestyle', 'none');
-    scatter(x,data(:,i),70,[0 0 0],symbolVector{mod(i,2)+1},'MarkerFaceAlpha',0.85,'MarkerEdgeColor','k','LineWidth',2,'jitter','on','jitterAmount',0.05); %,'jitter','on','jitterAmount',0.05 <- type in if you want jitter
+    scatter(x,data(:,i),70,[0 0 0],symbolVector{mod(i,2)+1},'MarkerFaceAlpha',0.85,'MarkerEdgeColor','k','LineWidth',1,'jitter','on','jitterAmount',0.05); %,'jitter','on','jitterAmount',0.05 <- type in if you want jitter
     
 %     scatter(x,data(:,i),[],plotColors(i,:),'filled','MarkerFaceAlpha',0.85,'MarkerEdgeColor','k'); %,'jitter','on','jitterAmount',0.05 <- type in if you want jitter
 end
@@ -217,7 +220,7 @@ ylabel(labels_xy{2}) % y label
 
 %% format figure 
 set(gca,'ylim',yLimits,'FontSize',...
-    fontSize,'tickdir','out','XColor',[0 0 0],'YColor',[0 0 0],'linewidth',3,'box','off',...
+    fontSize,'tickdir','out','XColor',[0 0 0],'YColor',[0 0 0],'linewidth',1.5,'box','off',...
     'YTick',yTickMarks);
 if exist('manualTickLabels_X','var')
    xticklabels(backuplabels); 

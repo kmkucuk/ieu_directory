@@ -33,7 +33,7 @@ Screen('BlendFunction', window, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA');
 [screenXpixels, screenYpixels] = Screen('WindowSize', window);
 
 
-% Get the centre coordinate of the window
+% Get the center coordinate of the window
 [xCenter, yCenter] = RectCenter(windowRect);
 
 

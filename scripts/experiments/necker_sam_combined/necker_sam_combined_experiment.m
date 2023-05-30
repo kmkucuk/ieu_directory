@@ -56,7 +56,7 @@ fileproblem = input('That file already exists! Append a .x (1), overwrite (2), o
         outputname = [outputname '.x'];
     end
 end
-cd('E:\Backups\Matlab Directory\2019-2020\MultistableExperiment\RawDataFolder');
+cd('E:\Backups\Matlab Directory\ieu_directory\scripts\experiments\necker_sam_combined');
 outfile = fopen(outputname,'w'); % open a file for writing data out
 
 fprintf(outfile, 'subid\t subage\t gender\t group\t Block_Type\t blockNumber\t Press_Array\t Pressed_Key\t Press_Time\t Reaction_Time\t Exo_Switch_Time\t \n');
@@ -64,7 +64,7 @@ fprintf(outfile, 'subid\t subage\t gender\t group\t Block_Type\t blockNumber\t P
 %%Window%%
 
 screens=Screen('Screens');
-SCNM=0; %max(screens);
+SCNM=max(screens);
 
 
 white=WhiteIndex(SCNM);
@@ -75,7 +75,8 @@ grey=white/2;
 
 %OpenWindow
 
-[window,windowrect]=PsychImaging('OpenWindow',SCNM,black);
+[window,windowrect]=PsychImaging('OpenWindow',SCNM,black,[0 0 1366 768]);%[700 0 1000 300]
+
 [Xcenter,Ycenter]=RectCenter(windowrect);
 centercoordinates=[Xcenter, Ycenter];
 
@@ -106,16 +107,16 @@ instructionstring=['Bu sirada kurallara tekrar goz atin:\n \n'...
 %%%% Importing Instruction and Stimuli Visuals %%%%    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-importInstructionVisuals(window);
+importInstructionVisuals(window,'E:\Backups\Matlab Directory\ieu_directory\scripts\experiments\necker_sam_combined\materials\Instructions');
 
-importStimuliVisuals(window);
+importStimuliVisuals(window,'E:\Backups\Matlab Directory\ieu_directory\scripts\experiments\necker_sam_combined\materials\Stimuli');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%Vector for gif-like WHILE Loop of SAM%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 samvector=[fix_sam_Texture,samsecond_Texture,samfirst_Texture,samthird_Texture];   
-fixationlatency=.075; targetlatency=.156; 
+fixationlatency=.085; targetlatency=.165; 
 stimulusduration=[fixationlatency,targetlatency];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -805,7 +806,7 @@ for trialsequence = 1:trainingOrNot
     %%% Save workspace both in training and in Trials
     %%% It will not save images and AlexNet Workspace variables because they are both unnecessary and big
     
-    cd('E:\Backups\Matlab Directory\2019-2020\MultistableExperiment\RawDataFolder');
+    cd('E:\Backups\Matlab Directory\ieu_directory\scripts\experiments\necker_sam_combined');
     WSFileName=sprintf('%s_%s',subid,saveCondition);
     save(WSFileName, '-regexp', '^(?!(Initial_Ins_img|Prac_1_Ins_img|Prac_2_Ins_img|Prac_3_Ins_img|Prac_4_Ins_img|Test_1_Ins_img|Test_2_Ins_img|Test_3_Ins_img|Test_4_Ins_img|Thanks_Ins_img|net)$).');
 end

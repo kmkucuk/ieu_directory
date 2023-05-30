@@ -1,0 +1,59 @@
+*** SART SCRIPTS ***
+EXPERIMENT AND TRIAL MARKERS
+
+no Press Byte: 120
+left press byte (button 1): 248
+right press byte (button 2): 88
+
+
+experiment start/stop: S1/S2
+experiment pause/continue: S3/S4
+
+MAIN STIM MARKERS
+congruent Stimulus Marker = S20
+incongruent Stimulus Marker = S21 
+neutral Stimulus Marker = S22
+
+DETAILED STIM MARKERS
+CONG-left/CONG-right stimulus marker = S30/31
+INCONG-left/INCONG-right stimulus marker = S35/36
+NEUTRAL-left/NEUTRAL-right stimulus marker = S40/41
+
+
+pressed Response Marker = R1 (Response marker, automatically created whenever a press occurs)
+
+correct Hit Marker   = S10 (it is seen when pressed on a non-target trial)
+incorrect Marker     = S9 (first s10 seen then s8 / pressed target when shouldn't)
+omission Marker      = S8  (no response occur during non-target)
+
+
+EXPERIMENT Trials
+
+ISI (Inter Stimulus Interval) = 1 sec
+experiment start signal after instructions/end of experiment marker: S1/S2
+experiment start/stop: S52/S53
+
+
+*** SPONTANEOUS SCRIPT ***
+
+
+experiment start/stop: S1/S2
+experiment pause/continue: S3/S4
+
+
+eyes closed start/stop: S6/S7
+eyes open start/stop: S8/S9
+
+Eyes closed 1s period marker = S15
+Eyes open 1s period marker   = S16
+
+
+
+
+
+
+
+
+
+
+
